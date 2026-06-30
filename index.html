@@ -1511,21 +1511,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KALAM PHOTO & AADHAR EDITOR PRO</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"><\/script>
 
     <style>
-        :root { --primary: #2563eb; --bg: #f1f5f9; --text: #1e293b; --aadhar-accent: #ff9933; --success: #10b981; --danger: #ef4444; }
+        :root { --primary: #2563eb; --bg: #f1f5f9; --text: #1e293b; --aadhar-accent: #ff9933; --success: #10b981; }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            margin: 0;
-            padding: 20px;
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+            margin: 0; 
+            padding: 20px; 
             overflow-x: hidden;
         }
 
@@ -1535,15 +1535,15 @@
 
         .corner-brand { position: fixed; bottom: 20px; right: 20px; background: #000; color: white; padding: 12px 24px; border-radius: 50px; font-size: 14px; font-weight: 800; box-shadow: 0 4px 20px rgba(0,0,0,0.4); z-index: 100; display: flex; align-items: center; gap: 10px; border: 2px solid rgba(255,255,255,0.1); }
 
-        .card {
-            background: rgba(255, 255, 255, 0.97);
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            max-width: 500px;
-            margin: auto;
-            text-align: center;
-            position: relative;
+        .card { 
+            background: rgba(255, 255, 255, 0.97); 
+            padding: 25px; 
+            border-radius: 12px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+            max-width: 500px; 
+            margin: auto; 
+            text-align: center; 
+            position: relative; 
             z-index: 10;
             border-top: 6px solid var(--primary);
             transition: all 0.3s ease;
@@ -1564,36 +1564,6 @@
         .adjust-btn { background: var(--primary); color: white; border: none; margin-top: 10px; cursor: pointer; display: none; font-weight: 600; transition: 0.3s; }
         .adjust-btn:hover { opacity: 0.9; }
 
-        /* Background Remover Styling */
-        .bg-remove-btn {
-            background: #da2828;
-            color: white;
-            border: none;
-            cursor: pointer;
-            display: none;
-            font-weight: 800;
-            margin-top: 8px;
-            font-size: 16px;
-            transition: 0.3s;
-        }
-        .bg-remove-btn:hover { background: #b11a1a; }
-        
-        /* Success banner matching the screenshot exactly */
-        .api-status { font-size: 13px; font-weight: 600; margin-top: 8px; display: none; }
-        .api-status.success {
-            display: block !important;
-            background-color: #eafaf1; 
-            color: #0b663c; 
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 17px;
-            font-weight: 800;
-            border: none;
-            text-align: center;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
         .upload-row-box {
             display: flex;
             align-items: center;
@@ -1607,7 +1577,7 @@
         }
 
         .append-indicator-toggle {
-            display: none;
+            display: none; 
             align-items: center;
             justify-content: center;
             width: 52px;
@@ -1632,7 +1602,7 @@
         .append-indicator-toggle .status-dot {
             width: 12px;
             height: 12px;
-            background-color: #dc2626;
+            background-color: #dc2626; 
             border-radius: 50%;
             transition: all 0.2s ease;
         }
@@ -1641,7 +1611,7 @@
             border-color: var(--success);
         }
         .append-indicator-toggle.active .status-dot {
-            background-color: var(--success);
+            background-color: var(--success); 
         }
 
         #editor-section { display: none; margin-top: 15px; border: 2px dashed #cbd5e1; padding: 10px; border-radius: 8px; }
@@ -1683,9 +1653,6 @@
             <div class="status-dot"></div>
         </div>
     </div>
-
-    <button id="bg-remove-btn" class="bg-remove-btn" onclick="removeBackground()"><i class="fa fa-pencil"></i> Remove Background AI</button>
-    <div id="apiStatus" class="api-status"></div>
 
     <button id="show-adjuster" class="adjust-btn" onclick="toggleAdjuster()"><i class="fa fa-crop"></i> Adjust Photo</button>
 
@@ -1737,26 +1704,22 @@
     const pdfjsLib = window['pdfjs-dist/build/pdf'];
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-    const API_KEY = "oahXt6i8HrkxHRVyZ3t9BpT4";
-
     let cropper;
     let isAdjusting = false;
-    let originalImageSrc = null;
+    let originalImageSrc = null; 
     let lastCroppedImage = null;
 
-    let currentXPosition = 50;
+    let currentXPosition = 50; 
     let currentYPosition = 50;
     let totalItemsPrintedOnSheet = 0;
     let isCanvasInitialized = false;
-    let isAppendActive = false;
+    let isAppendActive = false; 
 
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
     const imagePreview = document.getElementById('image-preview');
     const uploadInput = document.getElementById('upload');
     const adjustBtn = document.getElementById('show-adjuster');
-    const bgRemoveBtn = document.getElementById('bg-remove-btn');
-    const apiStatus = document.getElementById('apiStatus');
     const editorSection = document.getElementById('editor-section');
     const appendIndicator = document.getElementById('appendIndicator');
 
@@ -1791,9 +1754,6 @@
         isAdjusting = false;
         editorSection.style.display = 'none';
         adjustBtn.style.display = 'none';
-        bgRemoveBtn.style.display = 'none';
-        apiStatus.style.display = 'none';
-        apiStatus.className = "api-status";
         adjustBtn.innerHTML = "<i class='fa fa-crop'></i> Adjust Photo";
         originalImageSrc = null;
         lastCroppedImage = null;
@@ -1808,7 +1768,7 @@
     }
 
     function toggleAppendState() {
-        if (!isCanvasInitialized) return;
+        if (!isCanvasInitialized) return; 
         isAppendActive = !isAppendActive;
         if (isAppendActive) {
             appendIndicator.classList.add('active');
@@ -1832,9 +1792,6 @@
         isAdjusting = false;
         editorSection.style.display = 'none';
         adjustBtn.style.display = 'none';
-        bgRemoveBtn.style.display = 'none';
-        apiStatus.style.display = 'none';
-        apiStatus.className = "api-status";
         adjustBtn.innerHTML = "<i class='fa fa-crop'></i> Adjust Photo";
         lastCroppedImage = null;
 
@@ -1846,7 +1803,7 @@
                 try {
                     const pdf = await pdfjsLib.getDocument({ data: typedarray, password: password }).promise;
                     const page = await pdf.getPage(1);
-                    const viewport = page.getViewport({ scale: 6.0 });
+                    const viewport = page.getViewport({ scale: 6.0 }); 
                     const tempCanvas = document.createElement('canvas');
                     const tempCtx = tempCanvas.getContext('2d');
                     tempCanvas.height = viewport.height;
@@ -1856,8 +1813,8 @@
                     
                     if(document.getElementById('workMode').value === 'aadhar') {
                         const cropW = tempCanvas.width;
-                        const cropH = tempCanvas.height * 0.32;
-                        const cropY = tempCanvas.height - cropH - (tempCanvas.height * 0.04);
+                        const cropH = tempCanvas.height * 0.32; 
+                        const cropY = tempCanvas.height - cropH - (tempCanvas.height * 0.04); 
                         const finalCrop = document.createElement('canvas');
                         finalCrop.width = cropW; finalCrop.height = cropH;
                         finalCrop.getContext('2d').drawImage(tempCanvas, 0, cropY, cropW, cropH, 0, 0, cropW, cropH);
@@ -1867,9 +1824,6 @@
                     }
                     imagePreview.src = originalImageSrc;
                     adjustBtn.style.display = 'block';
-                    if (document.getElementById('workMode').value !== 'aadhar') {
-                        bgRemoveBtn.style.display = 'block';
-                    }
                 } catch (err) { alert("PDF Error! Password galat ho sakta hai."); }
             };
             reader.readAsArrayBuffer(file);
@@ -1877,79 +1831,8 @@
             originalImageSrc = URL.createObjectURL(file);
             imagePreview.src = originalImageSrc;
             adjustBtn.style.display = 'block';
-            if (document.getElementById('workMode').value !== 'aadhar') {
-                bgRemoveBtn.style.display = 'block';
-            }
         }
     });
-
-    // AI Background Removal Function
-    async function removeBackground() {
-        if (!originalImageSrc) {
-            alert("Pehle photo upload karein!");
-            return;
-        }
-
-        bgRemoveBtn.disabled = true;
-        apiStatus.className = "api-status";
-        apiStatus.style.background = "none";
-        apiStatus.style.padding = "0";
-        apiStatus.style.display = "block";
-        apiStatus.style.color = "var(--text)";
-        apiStatus.innerHTML = "<i class='fa fa-spinner fa-spin'></i> AI Background Remove Ho Raha Hai... Kripya Rukein.";
-
-        try {
-            // Fetch source image blob
-            const responseBlob = await fetch(originalImageSrc);
-            const blob = await responseBlob.blob();
-
-            const formData = new FormData();
-            formData.append("image_file", blob);
-            formData.append("size", "auto");
-
-            const apiResponse = await fetch("https://api.remove.bg/v1.0/removebg", {
-                method: "POST",
-                headers: {
-                    "X-Api-Key": API_KEY
-                },
-                body: formData
-            });
-
-            if (!apiResponse.ok) {
-                throw new Error("API Request Failed! Token check karein ya balance khatam ho sakta hai.");
-            }
-
-            const resultBlob = await apiResponse.blob();
-            originalImageSrc = URL.createObjectURL(resultBlob);
-            imagePreview.src = originalImageSrc;
-
-            // Reset Cropper context if active
-            if (cropper) {
-                cropper.replace(originalImageSrc);
-            }
-
-            // RED BUTTON WILL NOT BE HIDDEN NOW (as requested)
-            // bgRemoveBtn.style.display = "none"; 
-            
-            // Success response matched to screenshot custom styles and text
-            apiStatus.style.background = ""; // clearing inline styles
-            apiStatus.style.padding = ""; 
-            apiStatus.style.color = ""; 
-            apiStatus.className = "api-status success";
-            apiStatus.innerHTML = "Background Removed Successfully";
-
-        } catch (error) {
-            console.error(error);
-            apiStatus.className = "api-status";
-            apiStatus.style.background = "none";
-            apiStatus.style.padding = "0";
-            apiStatus.style.color = "var(--danger)";
-            apiStatus.innerHTML = "<i class='fa fa-exclamation-circle'></i> Error: Background nahi hataya ja saka.";
-            alert("Background Hatane Me Dikkat Aayi! Kripya check karein.");
-        } finally {
-            bgRemoveBtn.disabled = false;
-        }
-    }
 
     function toggleAdjuster() {
         const mode = document.getElementById('workMode').value;
@@ -1964,21 +1847,21 @@
             
             let ratio = mode === 'aadhar' ? 17.5 / 5.5 : parseFloat(document.getElementById("photo-size").value.split(',')[0]) / parseFloat(document.getElementById("photo-size").value.split(',')[1]);
 
-            cropper = new Cropper(imagePreview, {
-                aspectRatio: ratio,
+            cropper = new Cropper(imagePreview, { 
+                aspectRatio: ratio, 
                 viewMode: 1,
                 autoCropArea: 1
             });
             adjustBtn.innerHTML = "<i class='fa fa-check'></i> Apply Crop";
         } else {
-            if (cropper) {
-                lastCroppedImage = cropper.getCroppedCanvas({
-                    width: 3600,
+            if (cropper) { 
+                lastCroppedImage = cropper.getCroppedCanvas({ 
+                    width: 3600, 
                     imageSmoothingEnabled: true,
-                    imageSmoothingQuality: 'high'
-                });
+                    imageSmoothingQuality: 'high' 
+                }); 
                 imagePreview.src = lastCroppedImage.toDataURL('image/png', 1.0);
-                cropper.destroy(); cropper = null;
+                cropper.destroy(); cropper = null; 
             }
             isAdjusting = false;
             editorSection.style.display = 'none';
@@ -2001,7 +1884,7 @@
         let isA4FullSize = (sizeValue === "2480,3508" && mode !== 'aadhar');
 
         if (mode === 'aadhar') {
-            targetW = 17.5 * CM_TO_PX;
+            targetW = 17.5 * CM_TO_PX; 
             targetH = 5.5 * CM_TO_PX;
             cols = 1; qty = 1; gap = 40;
         } else {
@@ -2013,7 +1896,7 @@
             gap = isA4FullSize ? 0 : parseInt(document.getElementById("gap").value);
         }
 
-        let leftMarginStartX = isA4FullSize ? 0 : 50;
+        let leftMarginStartX = isA4FullSize ? 0 : 50; 
 
         if (!isAppendActive || !isCanvasInitialized) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -2038,12 +1921,12 @@
                 }
 
                 ctx.save();
-                ctx.filter = "brightness(1.05) contrast(1.08) saturate(1.15)";
+                ctx.filter = "brightness(1.04) contrast(1.08) saturate(1.15)";
                 ctx.drawImage(img, currentXPosition, currentYPosition, targetW, targetH);
                 ctx.restore();
                 
                 ctx.save();
-                ctx.strokeStyle = "#000000";
+                ctx.strokeStyle = "#000000"; 
                 ctx.lineWidth = isA4FullSize ? 1 : 2;
                 ctx.strokeRect(currentXPosition, currentYPosition, targetW, targetH);
                 ctx.restore();
@@ -2056,9 +1939,9 @@
                     currentXPosition += targetW + gap;
                     totalItemsPrintedOnSheet++;
                     
-                    if (totalItemsPrintedOnSheet % cols === 0 && i < qty - 1) {
-                        currentXPosition = leftMarginStartX;
-                        currentYPosition += targetH + gap;
+                    if (totalItemsPrintedOnSheet % cols === 0 && i < qty - 1) { 
+                        currentXPosition = leftMarginStartX; 
+                        currentYPosition += targetH + gap; 
                     }
                 }
             }
@@ -2075,7 +1958,7 @@
     function downloadAndPrint() {
         const link = document.createElement('a');
         link.download = 'Kalam_HD_Print.png';
-        link.href = canvas.toDataURL("image/png", 1.0);
+        link.href = canvas.toDataURL("image/png", 1.0); 
         link.click();
         setTimeout(() => { window.print(); }, 500);
     }
